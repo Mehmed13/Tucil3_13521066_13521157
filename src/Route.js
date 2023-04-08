@@ -1,8 +1,8 @@
 // Description: Class Route
 // Attribute:
-// - currentNode: node yang sedang ditempati
-// - path: array yang berisi node yang sudah dilewati
-// - cost: nilai cost dari rute yang sudah dilewati
+// - currentNode: node yang sedang ditempati/ expandNode
+// - path: array yang berisi nodeName yang sudah dilewati
+// - cost: nilai cost dari rute yang sudah dilewati menuju currentNode + heuristic dari currentNode
 
 
 class Route {

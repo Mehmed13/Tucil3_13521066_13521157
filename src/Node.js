@@ -9,10 +9,12 @@ class Node {
         this.name = name;
         this.heuristic = heuristic;
         this.neighbour = [];
+        this.visited = false;
     }
 
     getName() { return this.name; }
     getHeuristic() { return this.heuristic; }
+    isVisited() { return this.visited; }
     addNeighbour(node, distance) {
         if (this.neighbour.length == 0) {
             this.neighbour.push([node, distance]);
@@ -41,6 +43,10 @@ class Node {
 
     getNeighbourCount() {
         return this.neighbour.length;
+    }
+
+    setVisited() {
+        this.visited = true;
     }
 }
 
