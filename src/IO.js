@@ -127,11 +127,27 @@ function generateGraph(mapInfo) {
                     }
                 }
             }
-            graph.push(node);
         }
-        return graph;
+        graph.push(node);
     }
+    return graph;
 }
 
+/* TESTING */
+// readInputFile : passed
+// generateMapInfo : passed
+// generateGraph : passed
 
-module.exports = { readInputFile, generateMapInfo, generateGraph };
+// matrix = readInputFile("test1.txt");
+// mapInfo = generateMapInfo(matrix);
+
+// graph = generateGraph(mapInfo);
+// // console.log(graph);
+// for (let i = 0; i < graph.length; i++) {
+//     console.log(graph[i].getName());
+//     console.log(graph[i].getNeighbours());
+// }
+
+
+
+module.exports = { readInputFile, generateMapInfo, generateGraph, positionInGraph };
