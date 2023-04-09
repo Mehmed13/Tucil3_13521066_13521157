@@ -1,0 +1,6 @@
+Simpul, Padang, Jakarta, Bandung, Surabaya, Medan
+Padang, 0, 1000, 2000, 3000, 4000
+Jakarta, 1000, 0, 1000, 2000, 3000
+Bandung, 2000, 1000, 0, 1000, 2000
+Surabaya, 3000, 2000, 1000, 0, 1000
+Medan, 4000, 3000, 2000, 1000, 0
