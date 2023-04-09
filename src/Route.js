@@ -21,6 +21,20 @@ class Route {
     addCost(cost) {
         this.cost += cost;
     }
+
+    isPathExist(nodeName) {
+        let i = 0;
+        let found = false;
+        while ((i < this.path.length) && (!found)) {
+            if (this.path[i] == nodeName) {
+                found = true;
+            } else {
+                i++;
+            }
+        }
+        return found;
+    }
+
 }
 
 
