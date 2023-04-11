@@ -5,7 +5,7 @@ const IO = require('./IO.js');
 const AStar = require('./AStar.js');
 
 // Inisialisasi Graph dari input
-let matrices = IO.readInputFile('test3.txt');
+let matrices = IO.readInputFile('test2.txt');
 let mapInfo = IO.generateMapInfo(matrices);
 let graph = IO.generateGraph(mapInfo);
 
@@ -18,13 +18,15 @@ let startNode = graph[0];
 let goalNode = graph[graph.length - 1];
 
 // Set heuristic value untuk setiap node
-AStar.setGraphHeuristic(graph, goalNode.getName());
+AStar.setGraphHeuristic(graph, goalNode);
 
 
 // console.log("AFTER SETTING HEURISTIC");
 // for (let i = 0; i < graph.length; i++) {
 //     console.log(graph[i].getName());
-//     console.log(graph[i].getNeighbours());
+//     console.log(graph[i].getHeuristic());
+//     console.log("===============");
+//     // console.log(graph[i].getNeighbours());
 // }
 
 // Jalankan A*

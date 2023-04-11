@@ -4,11 +4,14 @@
 // - headIndex: index dari item yang paling depan
 
 class PrioQueue {
+    // ctor
     constructor() {
         this.items = {};
         this.headIndex = 0;
         this.tailIndex = 0;
     }
+
+    // Method
     enqueue(item) {
         // Jika kosong, langsung masukkan route pada queue
         if (this.isEmpty()) {

@@ -2,24 +2,20 @@ const PrioQueue = require('./PrioQueue.js').PrioQueue;
 const Route = require('./Route.js').Route;
 
 /*
-    Fungsi untuk set nilai heuristic untuk setiap node di dalam graph, sesuai goal
-    masih temporary nunggu kalau bisa menggunakan koordinat
+    Fungsi untuk set nilai heuristic untuk setiap node di dalam graph, sesuai goal.
+    Nilai heuristic diperoleh dari euclidean distance dari node ke goal
 */
 function setGraphHeuristic(graph, goal) {
     // Set heuristic untuk setiap node
     for (let i = 0; i < graph.length; i++) {
         let heuristicValue = 0;
-        if (graph[i].getName() != goal) {
-            if (graph[i].isNeighbour(goal)) { // Jika node adalah tetangga goal
-                heuristicValue = graph[i].getNeighbourDistancebyName(goal);
-            } else { // Jika node bukan tetangga goal, ambil jarak ke tetangga terdekat
-                heuristicValue = graph[i].getNeighbourDistance(0);
-            }
+        // Jika bukan node bukan goal, maka hitung euclidean distance dan set sebagai heuristic value
+        if (graph[i].getName() != goal.getName()) {
+            heuristicValue = Math.sqrt(Math.pow(graph[i].getPosition().getX() - goal.getPosition().getX(), 2) + Math.pow(graph[i].getPosition().getY() - goal.getPosition().getY(), 2));
         }
         graph[i].setHeuristic(heuristicValue);
     }
 }
-
 
 
 /*
@@ -68,12 +64,6 @@ function runAStarAlgorithm(startNode, goal) {
         let currentNode = currentRoute.getCurrentNode();
         currentNode.setVisited();
 
-        // console.log(currentRoute);
-        // console.log(currentRoute);
-        // for (let i = 0; i < closed_list.length; i++) {
-        //     console.log(closed_list[i].getCurrentNode().getName());
-        // }
-
         // Jika currentNode adalah goal, maka return currentRoute
         if (currentNode.getName() == goal) {
             return currentRoute;
@@ -97,12 +87,7 @@ function runAStarAlgorithm(startNode, goal) {
                     open_list.enqueue(newRoute, newRoute.getCost());
                 }
             }
-            // console.log(currentRoute);
         }
-
-        // console.log("==================");
-        // open_list.print();
-        // break;
     }
 }
 
