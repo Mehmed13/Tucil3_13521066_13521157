@@ -1,4 +1,4 @@
-const open_list = require('./open_list.js').open_list;
+const PrioQueue = require('./PrioQueue.js').PrioQueue;
 const Route = require('./Route.js').Route;
 
 /*
@@ -30,7 +30,6 @@ function isNeedPruning(currentRoute, newNode, closed_list) {
     if (closed_list.length == 0) {
         return false;
     }
-
     // Jika closed_list tidak kosong, maka cek apakah ada route yang memiliki cost lebih besar dari currentRoute
     let isPruningNeeded = false;
     for (let i = 0; i < closed_list.length; i++) {
@@ -46,11 +45,6 @@ function isNeedPruning(currentRoute, newNode, closed_list) {
     return isPruningNeeded;
 }
 
-
-
-
-
-
 /*
     prekondisi: graph sudah memiliki nilai heuristic
     Fungsi untuk menghasilkan jalur dari start ke goal menggunakan algoritma A*
@@ -58,13 +52,13 @@ function isNeedPruning(currentRoute, newNode, closed_list) {
 
 */
 function runAStarAlgorithm(startNode, goal) {
-    // Inisialisasi open_list, closed_list dan Route
+    // Inisialisasi open_list, closed_list dan Route   
     let open_list = new PrioQueue();
     let closed_list = [];
-    let route = new Route(startNode, [], 0);
+    let route = new Route(startNode, [startNode.getName()], 0);
 
     // Masukkan route ke dalam open_list
-    open_list.enqueue(route, route.getCost());
+    open_list.enqueue(route);
 
     // Lakukan perulangan sampai open_list kosong atau sampai goal ditemukan
     while (!open_list.isEmpty()) {
@@ -72,6 +66,13 @@ function runAStarAlgorithm(startNode, goal) {
         let currentRoute = open_list.dequeue();
         closed_list.push(currentRoute);
         let currentNode = currentRoute.getCurrentNode();
+        currentNode.setVisited();
+
+        // console.log(currentRoute);
+        // console.log(currentRoute);
+        // for (let i = 0; i < closed_list.length; i++) {
+        //     console.log(closed_list[i].getCurrentNode().getName());
+        // }
 
         // Jika currentNode adalah goal, maka return currentRoute
         if (currentNode.getName() == goal) {
@@ -89,12 +90,20 @@ function runAStarAlgorithm(startNode, goal) {
 
                 // Jika neighbour belum pernah dikunjungi atau pruning tidak diperlukan
                 if (!isNeedPruning(currentRoute, neighbour, closed_list)) {
-                    let newRoute = new Route(neighbour, currentRoute.getPath(), currentRoute.getCost());
+                    let newPath = JSON.parse(JSON.stringify(currentRoute.getPath()));
+                    let newRoute = new Route(neighbour, newPath, currentRoute.getCost());
                     newRoute.addPath(neighbourName);
-                    newRoute.addCost(neighbour.getNeighbourDistancebyName(currentNode.getName()) + neighbour.getHeuristic());
+                    newRoute.addCost(neighbour.getNeighbourDistancebyName(currentNode.getName()));
                     open_list.enqueue(newRoute, newRoute.getCost());
                 }
             }
+            // console.log(currentRoute);
         }
+
+        // console.log("==================");
+        // open_list.print();
+        // break;
     }
 }
+
+module.exports = { runAStarAlgorithm, setGraphHeuristic };
