@@ -19,10 +19,7 @@ class PrioQueue {
             let i = this.headIndex;
             let found = false;
             while ((i < this.tailIndex) && (!found)) {
-                if (this.items[i].getCost() > item.getCost()) {
-                    // Masukkan item pada index i
-                    this.items[this.tailIndex] = item;
-                    this.tailIndex++;
+                if ((this.items[i].getCost() + this.items[i].getCurrentNode().getHeuristic()) > (item.getCost() + item.getCurrentNode().getHeuristic())) {
                     found = true;
                 } else {
                     i++;
@@ -31,8 +28,14 @@ class PrioQueue {
             if (!found) {
                 // Masukkan item pada index tailIndex
                 this.items[this.tailIndex] = item;
-                this.tailIndex++;
+            } else {
+                // Masukkan item pada index i
+                for (let j = i; j < this.tailIndex; j++) {
+                    this.items[j + 1] = this.items[j];
+                }
+                this.items[i] = item;
             }
+            this.tailIndex++;
         }
     }
     dequeue() {
@@ -53,7 +56,7 @@ class PrioQueue {
     print() {
         let str = "";
         for (let i = this.headIndex; i < this.tailIndex; i++) {
-            str += this.items[i] + "; ";
+            str += this.items[i].getCurrentNode().getName() + ", " + (this.items[i].getCost() + this.items[i].getCurrentNode().getHeuristic()).toString() + "; ";
         }
         console.log(str);
     }
