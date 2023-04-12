@@ -6,6 +6,17 @@
     <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
         integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM=" crossorigin=""></script>
     <link rel="stylesheet" href="styles.css" />
+    <script type="module">
+        import { toggleUCS, toggleAStar, toggleAdd, toggleDelete, togglePath, toggleSearch, saveFile, resetMapState } from './Map.js';
+        document.querySelector('#UCS').addEventListener('click', toggleUCS);
+        document.querySelector('#Astar').addEventListener('click', toggleAStar);
+        document.querySelector('#saveButton').addEventListener('click', saveFile);
+        document.querySelector('#Add').addEventListener('click', toggleAdd);
+        document.querySelector('#Path').addEventListener('click', togglePath);
+        document.querySelector('#Delete').addEventListener('click', toggleDelete);
+        document.querySelector('#Search').addEventListener('click', toggleSearch);
+        document.querySelector('#reset').addEventListener('click', resetMapState);
+    </script>
 </head>
 
 <body>
@@ -21,10 +32,13 @@
                 <br>
                 <div>
                     <h3>Algorithm</h3>
-                    <input type="radio" id="UCS" name="algo" value="UCS" checked="checked" onclick="toggleUCS()">
+
+                    <input type="radio" id="UCS" name="algo" value="UCS" checked="checked">
                     <label for="UCS">UCS</label>
-                    <input type="radio" id="A*" name="algo" value="A*" onclick="toggleAStar()">
-                    <label for="A*">A*</label>
+
+                    <input type="radio" id="Astar" name="algo" value="Astar">
+                    <label for="Astar">A*</label>
+
                 </div>
                 <br>
                 <br>
@@ -34,28 +48,27 @@
                 </div>
                 <div class="inputtxt">
                     <h3>Output to File</h3>
-                    <button onclick="saveFile()">Save File</button>
+                    <button id="saveButton">Save File</button>
                 </div>
                 <br>
                 <br>
                 <div>
                     <h3>Cursor Modes</h3>
-                    <input type="radio" id="Add" name="mode" value="Add" checked="checked" onclick="toggleAdd()">
+                    <input type="radio" id="Add" name="mode" value="Add" checked="checked">
                     <label for="Add">Marker Mode</label><br>
-                    <input type="radio" id="Path" name="mode" value="Path" onclick="togglePath()">
+                    <input type="radio" id="Path" name="mode" value="Path">
                     <label for="Path">Path Mode</label><br>
-                    <input type="radio" id="Delete" name="mode" value="Delete" onclick="toggleDelete()">
+                    <input type="radio" id="Delete" name="mode" value="Delete">
                     <label for="Delete">Delete Mode</label><br>
-                    <input type="radio" id="Search" name="mode" value="Search" onclick="toggleSearch()">
+                    <input type="radio" id="Search" name="mode" value="Search">
                     <label for="Search">Search Mode</label>
                 </div>
                 <br>
                 <br>
-                <button type="button" id="reset" name="reset" onclick="resetMapState()">Reset State</button>
+                <button type="button" id="reset" name="reset">Reset State</button>
             </form>
         </div>
     </div>
-    <script type="module" src="Map.js"></script>
 </body>
 
 </html>
