@@ -183,5 +183,10 @@ function generateGraph(mapInfo) {
     return graph;
 }
 
-export { readInputFile, generateMapInfo, generateGraph, positionInGraph };
+function resetGraph(graph) {
+    for (let i = 0; i < graph.length; i++) {
+        graph[i].resetVisited();
+    }
+}
+export { readInputFile, generateMapInfo, generateGraph, positionInGraph, resetGraph };
 // export { generateMapInfo, generateGraph, positionInGraph };

@@ -8,6 +8,8 @@ import { readInputFile, generateMapInfo, generateGraph, positionInGraph } from '
 // const AStar = require('./AStar.js');
 import { runAStarAlgorithm, setGraphHeuristic } from './AStar.js'
 
+import { runUCSAlgorithm } from './UCS.js'
+
 // Inisialisasi Graph dari input
 let matrices = readInputFile('test2.txt');
 console.log("Matrix");
@@ -39,7 +41,13 @@ setGraphHeuristic(graph, goalNode);
 // }
 
 // Jalankan A*
-let route = runAStarAlgorithm(startNode, goalNode.getName());
+let route1 = AStar.runAStarAlgorithm(startNode, goalNode.getName());
+IO.resetGraph(graph);
+
+let route2 = UCS.runUCSAlgorithm(startNode, goalNode.getName());
+
+// Jalankan UCS
 
 // Print hasil
-console.log(route);
+console.log(route2);
+console.log(route1);
