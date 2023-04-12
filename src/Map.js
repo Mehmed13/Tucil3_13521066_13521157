@@ -1,4 +1,5 @@
 import { runAStarAlgorithm, setGraphHeuristic } from './AStar.js';
+import { runUCSAlgorithm } from './UCS.js';
 import { generateGraph, generateMapInfo } from './IO.js';
 import { matrixData } from './IO.js';
 
@@ -259,28 +260,29 @@ export function plotToMap() {
 
 export function routeColoring() {
     resetColoring();
+    var matrixMap = generateMapMatrix();
+    var mapInfo = generateMapInfo(matrixMap);
+    var graph = generateGraph(mapInfo);
+    console.log(mapInfo);
+    for (var i = 0; i < graph.length; i++) {
+        if (pair[0].options.name == graph[i].getName()) {
+            var startNode = graph[i];
+        }
+    }
+    for (var i = 0; i < graph.length; i++) {
+        if (pair[1].options.name == graph[i].getName()) {
+            var goalNode = graph[i];
+        }
+    }
+
     if (algo == "A*") {
-        var matrixMap = generateMapMatrix();
-        var mapInfo = generateMapInfo(matrixMap);
-        console.log(mapInfo);
-        var graph = generateGraph(mapInfo);
-        for (var i = 0; i < graph.length; i++) {
-            if (pair[0].options.name == graph[i].getName()) {
-                var startNode = graph[i];
-            }
-        }
-        for (var i = 0; i < graph.length; i++) {
-            if (pair[1].options.name == graph[i].getName()) {
-                var goalNode = graph[i];
-            }
-        }
         setGraphHeuristic(graph, goalNode);
         var route = runAStarAlgorithm(startNode, goalNode.getName());
     } else if (algo == "UCS") {
-
+        var route = runUCSAlgorithm(startNode, goalNode.getName());
     }
 
-    if (route.path.length == 0) {
+    if (route.path.length <= 1) {
         alert("No path found.");
     } else {
         console.log(route);
