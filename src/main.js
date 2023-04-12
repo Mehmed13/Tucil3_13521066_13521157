@@ -1,13 +1,22 @@
 // Import class yang akan digunakan
-const Node = require('./Node.js').Node;
-const Route = require('./Route.js').Route;
-const IO = require('./IO.js');
-const AStar = require('./AStar.js');
+// const Node = require('./Node.js').Node;
+import { Node } from './Node.js';
+// const Route = require('./Route.js').Route;
+import { Route } from './Route.js';
+// const IO = require('./IO.js');
+import { readInputFile, generateMapInfo, generateGraph, positionInGraph } from './IO.js';
+// const AStar = require('./AStar.js');
+import { runAStarAlgorithm, setGraphHeuristic } from './AStar.js'
 
 // Inisialisasi Graph dari input
-let matrices = IO.readInputFile('test2.txt');
-let mapInfo = IO.generateMapInfo(matrices);
-let graph = IO.generateGraph(mapInfo);
+let matrices = readInputFile('test2.txt');
+console.log("Matrix");
+console.log(matrices);
+let mapInfo = generateMapInfo(matrices);
+console.log("Mapinfo");
+console.log(mapInfo);
+let graph = generateGraph(mapInfo);
+console.log(graph)
 
 // for (let i = 0; i < graph.length; i++) {
 //     console.log(graph[i].getName());
@@ -18,7 +27,7 @@ let startNode = graph[0];
 let goalNode = graph[graph.length - 1];
 
 // Set heuristic value untuk setiap node
-AStar.setGraphHeuristic(graph, goalNode);
+setGraphHeuristic(graph, goalNode);
 
 
 // console.log("AFTER SETTING HEURISTIC");
@@ -30,7 +39,7 @@ AStar.setGraphHeuristic(graph, goalNode);
 // }
 
 // Jalankan A*
-let route = AStar.runAStarAlgorithm(startNode, goalNode.getName());
+let route = runAStarAlgorithm(startNode, goalNode.getName());
 
 // Print hasil
 console.log(route);

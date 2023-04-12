@@ -16,4 +16,5 @@ class Coordinate {
     setY(y) { this.y = y; }
 }
 
-module.exports = { Coordinate };
+// module.exports = { Coordinate };
+export { Coordinate };

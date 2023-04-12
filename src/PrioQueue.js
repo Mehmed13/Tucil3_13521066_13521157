@@ -65,4 +65,5 @@ class PrioQueue {
     }
 }
 
-module.exports = { PrioQueue };
+// module.exports = { PrioQueue };
+export { PrioQueue };

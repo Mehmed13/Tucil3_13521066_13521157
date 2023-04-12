@@ -1,5 +1,7 @@
-const PrioQueue = require('./PrioQueue.js').PrioQueue;
-const Route = require('./Route.js').Route;
+// const PrioQueue = require('./PrioQueue.js').PrioQueue;
+import { PrioQueue } from './PrioQueue.js';
+// const Route = require('./Route.js').Route;
+import { Route } from './Route.js';
 
 /*
     Fungsi untuk set nilai heuristic untuk setiap node di dalam graph, sesuai goal.
@@ -91,4 +93,5 @@ function runAStarAlgorithm(startNode, goal) {
     }
 }
 
-module.exports = { runAStarAlgorithm, setGraphHeuristic };
+// module.exports = { runAStarAlgorithm, setGraphHeuristic };
+export { runAStarAlgorithm, setGraphHeuristic };

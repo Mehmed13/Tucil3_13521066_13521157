@@ -6,7 +6,8 @@
 // - visited: boolean yang menandakan apakah node sudah dikunjungi atau belum
 // - position: koordinat node
 
-const Coordinate = require('./Coordinate.js').Coordinate;
+// const Coordinate = require('./Coordinate.js').Coordinate;
+import { Coordinate } from "./Coordinate.js";
 
 class Node {
     // ctore
@@ -139,4 +140,5 @@ class Node {
 }
 
 
-module.exports = { Node };
+// module.exports = { Node };
+export { Node };
