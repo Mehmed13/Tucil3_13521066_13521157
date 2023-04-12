@@ -1,34 +1,48 @@
-// const open_list = require('./open_list.js').open_list;
+const PrioQueue = require('./PrioQueue.js').PrioQueue;
 const Route = require('./Route.js').Route;
 
 
-// Not Checked Yet
+/*
+    Fungsi untuk menghasilkan jalur dari start ke goal menggunakan algoritma UCS
+    fungsi mengembalikan Route object saat sampai ke goal, 
+    jika tidak ditemukan maka akan mengembalikan route dengan path kosong
+*/
 function runUCSAlgorithm(startNode, goal) {
-    let open_list = new PrioQueue();
-    let closed_list = [];
-    let route = new Route(startNode, [], 0);
+    // Inisialisasi prioQueue dan Route
+    let prioQueue = new PrioQueue();
+    let route = new Route(startNode, [startNode.getName()], 0);
+    // Masukkan route awal ke dalam prioQueue
+    prioQueue.enqueue(route);
 
-    open_list.enqueue(route, route.getCost());
-    while (!open_list.isEmpty()) {
-        let currentRoute = open_list.dequeue();
-        closed_list.push(currentRoute);
+    // Lakukan perulangan sampai prioQueue kosong
+    while (!prioQueue.isEmpty()) {
+        // Ambil route dengan cost terkecil
+        let currentRoute = prioQueue.dequeue();
         let currentNode = currentRoute.getCurrentNode();
+        currentNode.setVisited();
 
+        // Jika currentNode adalah goal, maka return currentRoute
         if (currentNode.getName() == goal) {
             return currentRoute;
         }
 
+        // Jika currentNode bukan goal, maka masukkan semua neighbour yang belum dikunjungi ke dalam prioQueue
         let neighbours = currentNode.getNeighbours();
         for (let i = 0; i < neighbours.length; i++) {
+
             let neighbour = neighbours[i][0];
             let neighbourName = neighbour.getName();
 
-            if (!currentRoute.isPathExist(neighbourName)) {
-                let newRoute = new Route(neighbour, currentRoute.getPath(), currentRoute.getCost());
+            if (!neighbour.isVisited()) {
+                let newPath = JSON.parse(JSON.stringify(currentRoute.getPath()));
+                let newRoute = new Route(neighbour, newPath, currentRoute.getCost());
                 newRoute.addPath(neighbourName);
                 newRoute.addCost(neighbour.getNeighbourDistancebyName(currentNode.getName()));
-                open_list.enqueue(newRoute, newRoute.getCost());
+                prioQueue.enqueue(newRoute, newRoute.getCost());
             }
         }
     }
+    return route;
 }
+
+module.exports = { runUCSAlgorithm };
