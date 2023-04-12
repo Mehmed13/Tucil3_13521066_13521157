@@ -44,7 +44,7 @@ function isNeedPruning(currentRoute, newNode, closed_list) {
 /*
     prekondisi: graph sudah memiliki nilai heuristic
     Fungsi untuk menghasilkan jalur dari start ke goal menggunakan algoritma A*
-    fungsi mengembalikan Route object saat sampai ke goal
+    fungsi mengembalikan Route object saat sampai ke goal, jika tidak ditemukan maka akan mengembalikan route dengan path kosong
 
 */
 function runAStarAlgorithm(startNode, goal) {

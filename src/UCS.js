@@ -2,7 +2,11 @@ const PrioQueue = require('./PrioQueue.js').PrioQueue;
 const Route = require('./Route.js').Route;
 
 
-// Not Checked Yet
+/*
+    Fungsi untuk menghasilkan jalur dari start ke goal menggunakan algoritma UCS
+    fungsi mengembalikan Route object saat sampai ke goal, 
+    jika tidak ditemukan maka akan mengembalikan route dengan path kosong
+*/
 function runUCSAlgorithm(startNode, goal) {
     // Inisialisasi prioQueue dan Route
     let prioQueue = new PrioQueue();
