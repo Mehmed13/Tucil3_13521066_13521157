@@ -5,23 +5,57 @@
         integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI=" crossorigin="" />
     <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
         integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM=" crossorigin=""></script>
-    <style>
-        #map {
-            height: 600px;
-        }
-    </style>
+    <link rel="stylesheet" href="styles.css" />
 </head>
 
 <body>
     <div id="map"></div>
-    <script>
-        var map = L.map('map').setView([-6.89140361736227, 107.61032928111902], 19);
-
-        L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            maxZoom: 19,
-            attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-        }).addTo(map);
-    </script>
+    <div class="content">
+        <div class="c1">
+            <h3>Path Planning</h3>
+        </div>
+        <div class="c2">
+            <form>
+                <br>
+                <br>
+                <br>
+                <div>
+                    <h3>Algorithm</h3>
+                    <input type="radio" id="UCS" name="algo" value="UCS" checked="checked" onclick="toggleUCS()">
+                    <label for="UCS">UCS</label>
+                    <input type="radio" id="A*" name="algo" value="A*" onclick="toggleAStar()">
+                    <label for="A*">A*</label>
+                </div>
+                <br>
+                <br>
+                <div class="inputtxt">
+                    <h3>Input File</h3>
+                    <input type="file" id="graphinput" name="graphinput" accept=".txt">
+                </div>
+                <div class="inputtxt">
+                    <h3>Output to File</h3>
+                    <button onclick="saveFile()">Save File</button>
+                </div>
+                <br>
+                <br>
+                <div>
+                    <h3>Cursor Modes</h3>
+                    <input type="radio" id="Add" name="mode" value="Add" checked="checked" onclick="toggleAdd()">
+                    <label for="Add">Marker Mode</label><br>
+                    <input type="radio" id="Path" name="mode" value="Path" onclick="togglePath()">
+                    <label for="Path">Path Mode</label><br>
+                    <input type="radio" id="Delete" name="mode" value="Delete" onclick="toggleDelete()">
+                    <label for="Delete">Delete Mode</label><br>
+                    <input type="radio" id="Search" name="mode" value="Search" onclick="toggleSearch()">
+                    <label for="Search">Search Mode</label>
+                </div>
+                <br>
+                <br>
+                <button type="button" id="reset" name="reset" onclick="resetMapState()">Reset State</button>
+            </form>
+        </div>
+    </div>
+    <script type="module" src="Map.js"></script>
 </body>
 
 </html>
