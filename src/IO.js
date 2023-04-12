@@ -1,6 +1,10 @@
-const fs = require('fs');
-const Node = require('./Node.js').Node;
-const Coordinate = require('./Coordinate.js').Coordinate;
+// const fs = require('fs');
+// import * as fs from 'fs';
+// export { fs };
+// const Node = require('./Node.js').Node;
+import { Node } from './Node.js';
+// const Coordinate = require('./Coordinate.js').Coordinate;
+import { Coordinate } from './Coordinate.js';
 /*
     FORMAT FILE INPUT
 
@@ -26,26 +30,50 @@ const Coordinate = require('./Coordinate.js').Coordinate;
 
 
 */
-
+export var matrixData = [];
 // Fungsi untuk membaca file txt input yang berbentuk matriks ketetanggan dan mengembalikan matrix of string
-function readInputFile(fileName) {
-    let matrix = [];
-    let text = fs.readFileSync('../test/' + fileName, { encoding: 'utf-8', flag: 'r' });
+// function readInputFile() {
+//     let matrix = [];
+//     let text = fs.readFileSync('../test/' + fileName, { encoding: 'utf-8', flag: 'r' });
 
-    // Ubah text menjadi array of lines
-    let lines = text.split("\r\n");
+//     // Ubah text menjadi array of lines
+//     let lines = text.split("\r\n");
 
-    // Ubah array of lines menjadi matrix of string
-    for (let i = 0; i < (lines.length - 1); i++) {
-        let arrElemen = lines[i].split(",");
-        arrElemen = arrElemen.map(elemen => { return elemen.trim() });
-        matrix.push(arrElemen);
-    }
-    if (lines.length > 0) {
-        matrix.push(lines[lines.length - 1].split(";"));
-    }
+//     // Ubah array of lines menjadi matrix of string
+//     for (let i = 0; i < (lines.length - 1); i++) {
+//         let arrElemen = lines[i].split(",");
+//         arrElemen = arrElemen.map(elemen => { return elemen.trim() });
+//         matrix.push(arrElemen);
+//     }
+//     if (lines.length > 0) {
+//         matrix.push(lines[lines.length - 1].split(";"));
+//     }
 
-    return matrix;
+//     return matrix;
+// }
+
+function readInputFile(input) {
+    matrixData.length = 0;
+    const file = input.target.files[0];
+    const reader = new FileReader();
+    reader.onload = function () {
+        var contents = reader.result;
+        contents = contents.toString();
+        // Ubah text menjadi array of lines
+        let lines = contents.split("\r\n");
+
+        // Ubah array of lines menjadi matrix of string
+        for (let i = 0; i < (lines.length - 1); i++) {
+            let arrElemen = lines[i].split(",");
+            arrElemen = arrElemen.map(elemen => { return elemen.trim() });
+            matrixData.push(arrElemen);
+        }
+        if (lines.length > 0) {
+            matrixData.push(lines[lines.length - 1].split(";"));
+        }
+    };
+    reader.readAsText(file);
+    return matrixData;
 }
 
 
@@ -88,8 +116,8 @@ function generateMapInfo(matrix) {
         let lastRow = matrix[matrix.length - 1];
         for (let i = 0; i < lastRow.length; i++) {
             let coordinate = lastRow[i].split(",");
-            let x = parseInt(coordinate[0].substring(1));
-            let y = parseInt(coordinate[1].substring(0, coordinate[1].length - 1));
+            let x = parseFloat(coordinate[0].substring(1));
+            let y = parseFloat(coordinate[1].substring(0, coordinate[1].length - 1));
             coordinates.push(new Coordinate(x, y));
         }
         // Memasukkan nama simpul dan matriks ketetanggan ke dalam mapInfo
@@ -155,4 +183,5 @@ function generateGraph(mapInfo) {
     return graph;
 }
 
-module.exports = { readInputFile, generateMapInfo, generateGraph, positionInGraph };
+export { readInputFile, generateMapInfo, generateGraph, positionInGraph };
+// export { generateMapInfo, generateGraph, positionInGraph };
