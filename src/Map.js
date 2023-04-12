@@ -291,7 +291,7 @@ export function routeColoring() {
             for (var p of paths) {
                 if ((route.path[i] == p.markers[0].options.name && route.path[i + 1] == p.markers[1].options.name) ||
                     (route.path[i] == p.markers[1].options.name && route.path[i + 1] == p.markers[0].options.name)) {
-                    p.line.setStyle({ color: 'blue' });
+                    p.line.setStyle({ color: 'red' });
                 }
             }
         }

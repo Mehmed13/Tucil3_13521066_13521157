@@ -42,4 +42,7 @@
 
 .text-icon {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: bolder;
+    color: darkblue;
+    font-size: 16px;
 }

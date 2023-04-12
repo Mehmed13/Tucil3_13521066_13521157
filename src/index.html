@@ -7,7 +7,7 @@
         integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM=" crossorigin=""></script>
     <link rel="stylesheet" href="styles.css" />
     <script type="module">
-        import { toggleUCS, toggleAStar, toggleAdd, toggleDelete, togglePath, toggleSearch, saveFileMap, resetMapState, generateMapMatrix, plotToMap } from './Map.js';
+        import { toggleUCS, toggleAStar, toggleAdd, toggleDelete, togglePath, toggleSearch, saveFileMap, resetMapState, plotToMap } from './Map.js';
         import { readInputFile } from './IO.js'
         document.querySelector('#UCS').addEventListener('click', toggleUCS);
         document.querySelector('#Astar').addEventListener('click', toggleAStar);
@@ -17,7 +17,6 @@
         document.querySelector('#Delete').addEventListener('click', toggleDelete);
         document.querySelector('#Search').addEventListener('click', toggleSearch);
         document.querySelector('#reset').addEventListener('click', resetMapState);
-        document.querySelector('#mapping').addEventListener('click', generateMapMatrix);
         document.querySelector('#Plot').addEventListener('click', plotToMap);
         document.querySelector('#graphinput').addEventListener('input', readInputFile);
     </script>
@@ -69,7 +68,6 @@
                 <br>
                 <br>
                 <button type="button" id="reset" name="reset">Reset State</button>
-                <button type="button" id="mapping" name="mapping">Map State</button>
             </form>
         </div>
     </div>
