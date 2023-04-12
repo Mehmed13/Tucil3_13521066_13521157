@@ -89,6 +89,7 @@ function runAStarAlgorithm(startNode, goal) {
             }
         }
     }
+    return route;
 }
 
 module.exports = { runAStarAlgorithm, setGraphHeuristic };

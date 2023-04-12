@@ -3,6 +3,7 @@ const Node = require('./Node.js').Node;
 const Route = require('./Route.js').Route;
 const IO = require('./IO.js');
 const AStar = require('./AStar.js');
+const UCS = require('./UCS.js');
 
 // Inisialisasi Graph dari input
 let matrices = IO.readInputFile('test2.txt');
@@ -18,7 +19,7 @@ let startNode = graph[0];
 let goalNode = graph[graph.length - 1];
 
 // Set heuristic value untuk setiap node
-AStar.setGraphHeuristic(graph, goalNode);
+// AStar.setGraphHeuristic(graph, goalNode.getName());
 
 
 // console.log("AFTER SETTING HEURISTIC");
@@ -30,7 +31,13 @@ AStar.setGraphHeuristic(graph, goalNode);
 // }
 
 // Jalankan A*
-let route = AStar.runAStarAlgorithm(startNode, goalNode.getName());
+let route1 = AStar.runAStarAlgorithm(startNode, goalNode.getName());
+IO.resetGraph(graph);
+
+let route2 = UCS.runUCSAlgorithm(startNode, goalNode.getName());
+
+// Jalankan UCS
 
 // Print hasil
-console.log(route);
+console.log(route2);
+console.log(route1);

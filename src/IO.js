@@ -155,4 +155,13 @@ function generateGraph(mapInfo) {
     return graph;
 }
 
-module.exports = { readInputFile, generateMapInfo, generateGraph, positionInGraph };
+/*
+ */
+function resetGraph(graph) {
+    for (let i = 0; i < graph.length; i++) {
+        graph[i].resetVisited();
+    }
+}
+
+
+module.exports = { readInputFile, generateMapInfo, generateGraph, positionInGraph, resetGraph };
